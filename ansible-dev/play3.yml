@@ -1,0 +1,10 @@
+---
+- hosts: ws
+  become: true
+  gather_facts: true
+  ignore_errors: true
+  tasks:
+    - name: Package Install
+      yum:
+        name: ['wget', 'finger']
+        state: present

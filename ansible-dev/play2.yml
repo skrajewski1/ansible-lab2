@@ -1,0 +1,17 @@
+---
+- hosts: ws
+  become: 1
+  gather_facts: 1
+  ignore_errors: True
+  vars: 
+    user_name: sean
+    group: terraform
+  vars_files:
+    - variables.yml
+  tasks:
+    - name: check server uptime
+      command: "{{my_command}}"
+      register: my_uptime
+    - name: list directory
+      shell: ls
+    - name: check the kernel version

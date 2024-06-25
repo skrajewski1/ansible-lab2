@@ -1,0 +1,13 @@
+---
+- hosts: wind
+  tasks:
+    - name: Create a directory
+      win_file:
+        path: C:\Users\Administrator\Desktop\sean
+        state: directory
+    
+    - name: Download file online
+      win_get_url:
+        dest: C:\Users\Administrator\Desktop\sean
+        url: https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.9.6.tar.xz
+    

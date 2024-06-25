@@ -1,0 +1,7 @@
+---
+- hosts: wind
+  roles: 
+  
+  - role: link
+    url_url: "{{my_url}}"
+    dest_path: C:\Users\Administrator\Desktop\sean

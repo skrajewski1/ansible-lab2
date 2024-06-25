@@ -9,10 +9,10 @@ pipeline {
         }
         stage('Upload Artifacts to JFrog') {
             steps {
-                 {
-                sh '''curl -u$JFROG_USER:$JFROG_PASS -T \
-                ansible-${BUILD_ID}.zip \
-                "http://34.239.249.252:8081/artifactory/ansible/ansible-${BUILD_ID}.zip"'''
+                withCredentials([usernamePassword(credentialsId: 'jfrog-credentials', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASS')]) {
+                    sh '''curl -u$JFROG_USER:$JFROG_PASS -T \
+                    ansible-${BUILD_ID}.zip \
+                    "http://34.239.249.252:8081/artifactory/ansible/ansible-${BUILD_ID}.zip"'''
                 }
             }
         }

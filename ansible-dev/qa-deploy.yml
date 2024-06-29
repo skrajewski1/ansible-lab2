@@ -14,15 +14,15 @@
       register: pid_output
     
     - name: Kill running app
-      shell: kill -9 pid_output.stdout
+      shell: kill -9 {{ pid_output.stdout }}
       when: pid_output.stdout != ''
 
     - name: Download new artifacts
       get_url:
-        get_url: http://52.3.250.12:8081/artifactory/geolocation/geo/bio_19.jar
+        url: http://52.3.250.12:8081/artifactory/geolocation/geo/bio_19.jar
         dest: /opt/qa/spg
         url_username: admin
-        url_password:  devops
+        url_password:  password
 
     - name: Run the app
       shell: nohup java -jar /opt/qa/spg/*.jar > /opt/qa/spg.log 2>&1 &

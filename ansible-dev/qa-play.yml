@@ -1,6 +1,6 @@
 ---
 - hosts: ws
-  become: yes 
+  become: true
   become_user: root
   ignore_errors: yes
   tasks:

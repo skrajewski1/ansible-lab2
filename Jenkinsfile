@@ -11,9 +11,9 @@ pipeline {
         stage('Upload Artifacts to JFrog') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'jfrog-credentials', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASS')]) {
-                    sh '''curl -u$JFROG_USER:$JFROG_PASS -T \
+                    sh '''curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
                     ansible-${BUILD_ID}.zip \
-                    "http://54.160.127.216:8081/artifactory/ansible/ansible-${BUILD_ID}.zip"'''
+                    "http://52.3.250.12:8081/artifactory/ansible/ansible-${BUILD_ID}.zip"'''
                 }
             }
         }

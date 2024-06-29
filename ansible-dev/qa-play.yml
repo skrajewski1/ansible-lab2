@@ -24,8 +24,8 @@
         path: /opt/qa/spg/spg.log
         state: touch
 
-    - name: Start and enable daemon
-      systemd:
+    - name: Start and enable Docker daemon
+      service:
         name: docker
         state: started
         enable: true

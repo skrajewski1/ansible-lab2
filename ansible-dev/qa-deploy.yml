@@ -14,12 +14,15 @@
       register: pid_output
       tags: 
         - a
+    - name: 
+      debug:
+        var: pid_output
+      tags:
+        - b
     
     - name: Kill running app
       shell: kill -9 "{{ pid_output.stdout }}"
       when: pid_output.stdout != ''
-      tags:
-        - b
 
     - name: Download new artifacts
       get_url:

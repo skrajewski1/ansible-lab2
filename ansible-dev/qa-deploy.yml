@@ -1,0 +1,28 @@
+---
+- hosts: ws
+  become: true
+  become_user: root
+  ignore_errors: true
+  tasks:
+    - name: Delete old artifacts
+      file:
+        path: /opt/qa/spg/*.jar
+        state: absent
+
+    - name: Get the PID
+      shell: lsof -i :8082
+      register: pid_output
+    
+    - name: Kill running app
+      shell: kill -9 pid_output.stdout
+      when: pid_output.stdout != ''
+
+    - name: Download new artifacts
+      get_url:
+        get_url: http://52.3.250.12:8081/artifactory/geolocation/geo/bio_19.jar
+        dest: /opt/qa/spg
+        url_username: admin
+        url_password:  devops
+
+    - name: Run the app
+      shell: nohup java -jar /opt/qa/spg/*.jar > /opt/qa/spg.log 2>&1 &

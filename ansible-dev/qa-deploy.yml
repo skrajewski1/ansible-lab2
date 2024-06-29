@@ -13,7 +13,7 @@
       shell: lsof -i :8082
       register: pid_output
       tag: 
-       - a
+        - a
     
     - name: Kill running app
       shell: kill -9 "{{ pid_output.stdout }}"
